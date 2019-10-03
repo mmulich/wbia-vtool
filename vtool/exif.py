@@ -268,31 +268,35 @@ def get_lat_lon(exif_dict, default=(-1, -1)):
         exif_dict[GPSINFO_CODE]
         PIL.ExifTags.TAGS[GPSINFO_CODE]
     """
-    if GPSINFO_CODE in exif_dict:
-        gps_info = exif_dict[GPSINFO_CODE]
+    try:
+        if GPSINFO_CODE in exif_dict:
+            gps_info = exif_dict[GPSINFO_CODE]
 
-        if (GPSLATITUDE_CODE in gps_info and
-             GPSLATITUDEREF_CODE in gps_info and
-             GPSLONGITUDE_CODE in gps_info and
-             GPSLONGITUDEREF_CODE in gps_info):
-            gps_latitude      = gps_info[GPSLATITUDE_CODE]
-            gps_latitude_ref  = gps_info[GPSLATITUDEREF_CODE]
-            gps_longitude     = gps_info[GPSLONGITUDE_CODE]
-            gps_longitude_ref = gps_info[GPSLONGITUDEREF_CODE]
-            try:
-                lat = convert_degrees(gps_latitude)
-                if gps_latitude_ref != 'N':
-                    lat = 0 - lat
+            if (GPSLATITUDE_CODE in gps_info and
+                 GPSLATITUDEREF_CODE in gps_info and
+                 GPSLONGITUDE_CODE in gps_info and
+                 GPSLONGITUDEREF_CODE in gps_info):
+                gps_latitude      = gps_info[GPSLATITUDE_CODE]
+                gps_latitude_ref  = gps_info[GPSLATITUDEREF_CODE]
+                gps_longitude     = gps_info[GPSLONGITUDE_CODE]
+                gps_longitude_ref = gps_info[GPSLONGITUDEREF_CODE]
+                try:
+                    lat = convert_degrees(gps_latitude)
+                    if gps_latitude_ref != 'N':
+                        lat = 0 - lat
 
-                lon = convert_degrees(gps_longitude)
-                if gps_longitude_ref != 'E':
-                    lon = 0 - lon
-                return lat, lon
-            except (ZeroDivisionError, TypeError):
-                # FIXME: -1, -1 is not a good invalid GPS
-                # Find out what the divide by zero really means
-                # currently we think it just is bad gps data
-                pass
+                    lon = convert_degrees(gps_longitude)
+                    if gps_longitude_ref != 'E':
+                        lon = 0 - lon
+                    return lat, lon
+                except (ZeroDivisionError, TypeError):
+                    # FIXME: -1, -1 is not a good invalid GPS
+                    # Find out what the divide by zero really means
+                    # currently we think it just is bad gps data
+                    pass
+    except:
+        pass
+
     return default
 
 
