@@ -10,8 +10,6 @@ CommandLine:
 """
 from __future__ import absolute_import, division, print_function, unicode_literals
 from setuptools import setup
-from utool import util_setup
-import utool as ut
 from os.path import dirname  # NOQA
 import six
 
@@ -19,6 +17,29 @@ import six
 
 #cyth.translate('vtool/keypoint.py')
 #cyth.translate('vtool/keypoint.py', 'vtool/spatial_verification.py')
+
+
+def native_mb_python_tag():
+    import sys
+    import platform
+    major = sys.version_info[0]
+    minor = sys.version_info[1]
+    ver = '{}{}'.format(major, minor)
+    if platform.python_implementation() == 'CPython':
+        # TODO: get if cp27m or cp27mu
+        impl = 'cp'
+        if ver == '27':
+            IS_27_BUILT_WITH_UNICODE = True  # how to determine this?
+            if IS_27_BUILT_WITH_UNICODE:
+                abi = 'mu'
+            else:
+                abi = 'm'
+        else:
+            abi = 'm'
+    else:
+        raise NotImplementedError(impl)
+    mb_tag = '{impl}{ver}-{impl}{ver}{abi}'.format(**locals())
+    return mb_tag
 
 
 def parse_version():
@@ -68,15 +89,21 @@ CLUTTER_PATTERNS = [
     'libsver.*'
 ]
 
+NAME = = 'vtool'
+MB_PYTHON_TAG = native_mb_python_tag()  # NOQA
+VERSION = parse_version()
+
 if six.PY2:
     INSTALL_REQUIRES += ['functools32 >= 3.2.3-1']
 
 if __name__ == '__main__':
+    import utool as ut
+    from utool import util_setup
     kwargs = util_setup.setuptools_setup(
         setup_fpath=__file__,
-        name='vtool',
+        name=NAME,
         packages=util_setup.find_packages(),
-        version=parse_version(),
+        version=VERSION,
         license=util_setup.read_license('LICENSE'),
         long_description=util_setup.parse_readme('README.md'),
         ext_modules=util_setup.find_ext_modules(),
