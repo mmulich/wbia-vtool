@@ -48,7 +48,24 @@ def mats_t(ndim):
 
 dpath = dirname(__file__)
 
-lib_fname = join(dpath, 'libsver' + ut.util_cplat.get_lib_ext())
+import ubelt as ub
+
+lib_fname_cand = list(ub.find_path(
+    name='libsver' + ut.util_cplat.get_lib_ext(),
+    path=[
+        join(dpath, 'lib'),
+        dpath
+    ],
+    exact=False)
+)
+
+if len(lib_fname_cand):
+    if len(lib_fname_cand) > 1:
+        print('multiple libsver candidates: {}'.format(lib_fname_cand))
+    lib_fname = lib_fname_cand[0]
+else:
+    raise Exception('cannot find path')
+    lib_fname = None
 
 
 if __name__ != '__main__':
