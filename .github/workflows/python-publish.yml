@@ -26,6 +26,7 @@ jobs:
 
       - name: Build wheels
         env:
+          CIBW_MANYLINUX_X86_64_IMAGE: wildme/manylinux:latest
           CIBW_BUILD: cp36-manylinux_x86_64 cp36-macosx_x86_64
         run: |
           python -m cibuildwheel --output-dir wheelhouse
