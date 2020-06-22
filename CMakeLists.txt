@@ -38,6 +38,8 @@ GET_OS_INFO()
 if (OS_IS_MACOS)
     message(STATUS "INCLUDING MACPORTS")
 
+    find_package(Eigen3 3 REQUIRED NO_MODULE)
+
     include_directories(/opt/local/include)
     link_directories(/opt/local/lib)
 
