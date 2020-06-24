@@ -21,7 +21,7 @@ sudo port install \
      OpenBLAS-devel \
      py36-h5py-devel \
      py36-gdal \
-     tesseract \
+     tesseract
 
 # OpenMP
 sudo port select clang mp-clang-5.0

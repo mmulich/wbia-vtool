@@ -4,6 +4,10 @@
 
 set -ex
 
+if [ -d /opt/local ]; then
+    alias clang="/opt/local/bin/clang-mp-5.0"
+fi
+
 export OPENCV_VERSION=4.2.0
 export WORKSPACE=$PWD
 
@@ -30,39 +34,43 @@ if [ ! -d /opt/opencv ]; then
         -D PYTHON3_INCLUDE_DIR=`python -c 'import distutils.sysconfig as s; print(s.get_python_inc())'` \
         -D PYTHON3_EXECUTABLE=`which python3.6` \
         -D BUILD_opencv_python2=OFF \
-         -D OPENCV_GENERATE_PKGCONFIG=ON \
-         -D ENABLE_PRECOMPILED_HEADERS=OFF \
-         -D BUILD_opencv_apps=OFF \
-         -D BUILD_SHARED_LIBS=OFF \
-         -D BUILD_TESTS=OFF \
-         -D BUILD_PERF_TESTS=OFF \
-         -D BUILD_DOCS=OFF \
-         -D BUILD_EXAMPLES=OFF \
-         -D BUILD_opencv_java=OFF \
-         -D BUILD_opencv_python3=ON \
-         -D BUILD_NEW_PYTHON_SUPPORT=ON \
-         -D INSTALL_C_EXAMPLES=OFF \
-         -D INSTALL_PYTHON_EXAMPLES=OFF \
-         -D INSTALL_CREATE_DISTRIB=ON \
-         -D BUILD_JPEG=ON \
-         -D BUILD_HDR=ON \
-         -D WITH_MATLAB=OFF \
-         -D WITH_TBB=ON \
-         -D WITH_CUDA=OFF \
-         -D WITH_CUBLAS=0 \
-         -D WITH_EIGEN=ON \
-         -D WITH_AVFOUNDATION=ON \
-         -D WITH_JPEG=ON \
-         -D BUILD_TIFF=ON \
-         -D WITH_HDR=ON \
-         -D WITH_V4L=ON \
-         -D WITH_GDAL=ON \
-         -D WITH_WIN32UI=OFF \
-         -D WITH_QT=OFF \
-         -D ENABLE_FAST_MATH=1 \
-         -D CUDA_FAST_MATH=1 \
-         -D OPENCV_ENABLE_NONFREE=ON \
-         -D OPENCV_EXTRA_MODULES_PATH=$WORKSPACE/opencv_contrib/modules \
+        -D OPENCV_GENERATE_PKGCONFIG=ON \
+        -D ENABLE_PRECOMPILED_HEADERS=OFF \
+        -D BUILD_opencv_apps=OFF \
+        -D BUILD_SHARED_LIBS=OFF \
+        -D BUILD_TESTS=OFF \
+        -D BUILD_PERF_TESTS=OFF \
+        -D BUILD_DOCS=OFF \
+        -D BUILD_EXAMPLES=OFF \
+        -D BUILD_opencv_java=OFF \
+        -D BUILD_opencv_python3=ON \
+        -D BUILD_NEW_PYTHON_SUPPORT=ON \
+        -D INSTALL_C_EXAMPLES=OFF \
+        -D INSTALL_PYTHON_EXAMPLES=OFF \
+        -D INSTALL_CREATE_DISTRIB=ON \
+        -D BUILD_JPEG=ON \
+        -D BUILD_HDR=ON \
+        -D WITH_MATLAB=OFF \
+        -D WITH_TBB=ON \
+        -D WITH_CUDA=OFF \
+        -D WITH_CUBLAS=0 \
+        -D WITH_EIGEN=ON \
+        -D WITH_AVFOUNDATION=ON \
+        -D WITH_JPEG=ON \
+        -D BUILD_TIFF=ON \
+        -D WITH_HDR=ON \
+        -D WITH_V4L=ON \
+        -D WITH_GDAL=ON \
+        -D WITH_WIN32UI=OFF \
+        -D WITH_QT=OFF \
+        -D ENABLE_FAST_MATH=1 \
+        -D CUDA_FAST_MATH=1 \
+        -D OPENCV_ENABLE_NONFREE=ON \
+        -D OPENCV_EXTRA_MODULES_PATH=$WORKSPACE/opencv_contrib/modules \
+        -D CMAKE_C_FLAGS="${CMAKE_C_FLAGS} -I/opt/local/include -stdlib=libc++" \
+        -D CMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} -I/opt/local/include -stdlib=libc++" \
+        -D CMAKE_SHARED_LINKER_FLAGS="${CMAKE_SHARED_LINKER_FLAGS} -L/opt/local/lib -lc++" \
+        -D CMAKE_EXE_LINKER_FLAGS="${CMAKE_EXE_LINKER_FLAGS} -L/opt/local/lib -lc++" \
          ..
     make -j9
 

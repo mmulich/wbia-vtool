@@ -24,9 +24,20 @@ jobs:
         run: |
           python -m pip install cibuildwheel==1.4.2
 
+      - name: Prepare MacPorts - Prefer Xcode 11.5
+        run: |
+          xcode-select -p
+          xcodebuild -version
+          sudo xcode-select -s /Applications/Xcode_11.5.app/Contents/Developer
+          xcodebuild -version
+
       - name: Install MacPorts
-        if: ${{ runner.os == 'macOS' }}
-        uses: medengineer/actions/setup-macports@master
+        uses: WildbookOrg/wbia-pypkg-build/actions/macports@v1.0.0
+
+      - name: Update MacPorts and check versioon
+        run: |
+          sudo port selfupdate
+          port version
 
       - name: Cache OpenCV dependency for macOS
         if: ${{ runner.os == 'macOS' }}
