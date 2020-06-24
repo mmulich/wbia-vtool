@@ -184,4 +184,3 @@ PYTHON_CONFIG_STATUS
   * python_site_packages = \"${python_site_packages}\"
   * python_sitename = \"${python_sitename}\"
 ")
-

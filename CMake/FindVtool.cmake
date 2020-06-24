@@ -25,4 +25,3 @@ find_package_handle_standard_args(Vtool DEFAULT_MSG
     VTOOL_LIBRARY VTOOL_INCLUDE_DIR)
 
 mark_as_advanced(VTOOL_LIBRARY VTOOL_INCLUDE_DIR)
-

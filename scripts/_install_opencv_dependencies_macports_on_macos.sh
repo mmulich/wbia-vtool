@@ -10,16 +10,22 @@ sudo port install \
      eigen3-devel \
      freetype \
      gdal \
-     google-glog \
      hdf5 \
      harfbuzz \
      lapack \
+     zlib \
+     openjpeg \
+     openexr \
+     webp \
+     tiff \
+     libgeotiff \
+     libpng \
      leptonica \
      libomp \
      llvm-5.0 \
      llvm_select \
      OpenBLAS-devel \
-     py36-h5py-devel \
+     py36-h5py \
      py36-gdal \
      tesseract
 

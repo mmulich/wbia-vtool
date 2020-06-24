@@ -2,7 +2,7 @@ macro(GET_OS_INFO)
     string(REGEX MATCH "Linux" OS_IS_LINUX ${CMAKE_SYSTEM_NAME})
     string(REGEX MATCH "Darwin" OS_IS_MACOS ${CMAKE_SYSTEM_NAME})
     set(SVER_LIB_INSTALL_DIR "lib${LIB_SUFFIX}")
-    set(SVERR_INCLUDE_INSTALL_DIR
+    set(SVER_INCLUDE_INSTALL_DIR
         "include/${PROJECT_NAME_LOWER}-${VTOOL_VERSION_MAJOR}.${VTOOL_VERSION_MINOR}")
 endmacro(GET_OS_INFO)
 
@@ -43,4 +43,3 @@ macro(vtool_add_pyunit file)
     add_dependencies(pyunit_${_testname} vtool)
     add_dependencies(test pyunit_${_testname})
 endmacro(vtool_add_pyunit)
-

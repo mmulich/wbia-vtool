@@ -6,7 +6,7 @@ add_dependencies(test tests)
 set(EXECUTABLE_OUTPUT_PATH ${TEST_OUTPUT_PATH})
 
 #---------- pyunit tests --------------
-if (BUILD_PYTHON_BINDINGS) 
+if (BUILD_PYTHON_BINDINGS)
     vtool_add_pyunit(test_akmeans.py)
     vtool_add_pyunit(test_coverage_max_reduce.py)
     vtool_add_pyunit(test_draw_keypoint.py)

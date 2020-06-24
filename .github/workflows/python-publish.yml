@@ -25,6 +25,7 @@ jobs:
           python -m pip install cibuildwheel==1.4.2
 
       - name: Prepare MacPorts - Prefer Xcode 11.5
+        if: ${{ runner.os == 'macOS' }}
         run: |
           xcode-select -p
           xcodebuild -version
@@ -32,9 +33,11 @@ jobs:
           xcodebuild -version
 
       - name: Install MacPorts
+        if: ${{ runner.os == 'macOS' }}
         uses: WildbookOrg/wbia-pypkg-build/actions/macports@v1.0.0
 
       - name: Update MacPorts and check versioon
+        if: ${{ runner.os == 'macOS' }}
         run: |
           sudo port selfupdate
           port version
@@ -58,6 +61,7 @@ jobs:
           CIBW_MANYLINUX_X86_64_IMAGE: wildme/manylinux:latest
           CIBW_BUILD: cp36-manylinux_x86_64 cp36-macosx_x86_64
           # Script to prepare the macos environment
+          CIBW_BEFORE_BUILD_LINUX: bash scripts/ci_prepare_linux_for_build.sh
           CIBW_BEFORE_BUILD_MACOS: bash scripts/ci_prepare_macos_for_build.sh
         run: |
           python -m cibuildwheel --output-dir wheelhouse
