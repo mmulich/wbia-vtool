@@ -241,7 +241,7 @@ KWARGS = OrderedDict(
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
         'Topic :: Scientific/Engineering :: Image Recognition',
     ],
-    cmake_args=['-DBUILD_TESTS=OFF', '-DBUILD_DOC=OFF',],
+    cmake_args=['-DBUILD_TESTS=OFF', '-DBUILD_DOC=OFF'],
     ext_modules=EmptyListWithLength(),  # hack for including ctypes bins
 )
 

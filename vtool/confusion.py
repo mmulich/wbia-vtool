@@ -130,7 +130,7 @@ class ConfusionMetrics(ub.NiceRepr):
         'tna': {'true_neg_acc', 'neg_predict_value', 'inv_precision', 'npv'},
         # -----
         'mk': {'markedness', 'deltaP', 'r_P'},
-        'bm': {'informedness', 'bookmaker_informedness', 'deltaP\'', 'r_R'},
+        'bm': {'informedness', 'bookmaker_informedness', "deltaP'", 'r_R'},
         # -----
         'mcc': {'matthews_correlation_coefficient'},
         'jacc': {'jaccard_coefficient'},
@@ -478,7 +478,7 @@ class ConfusionMetrics(ub.NiceRepr):
         assert len(indicies) > 0, 'no recall at target level'
         func = scipy.interpolate.interp1d(self.recall, self.fpr)
         interp_fpr = func(target_recall)
-        ## interpolate to target recall
+        # # interpolate to target recall
         # right_index  = indicies[0]
         # right_recall = self.recall[right_index]
         # left_index   = right_index - 1
