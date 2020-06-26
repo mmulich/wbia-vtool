@@ -27,8 +27,8 @@ if [ ! -d /opt/opencv ]; then
     mkdir -p $WORKSPACE/opencv/build
     cd $WORKSPACE/opencv/build
     cmake \
-        -D CMAKE_C_COMPILER=clang \
-        -D CMAKE_CXX_COMPILER=clang \
+        # -D CMAKE_C_COMPILER=clang \
+        # -D CMAKE_CXX_COMPILER=clang \
         -D CMAKE_BUILD_TYPE=RELEASE \
         -D CMAKE_INSTALL_PREFIX=/opt/opencv/ \
         -D OPENCV_GENERATE_PKGCONFIG=ON \

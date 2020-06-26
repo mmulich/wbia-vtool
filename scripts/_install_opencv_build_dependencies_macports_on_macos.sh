@@ -10,16 +10,27 @@ sudo port install \
      llvm-5.0 \
      llvm_select \
      libomp \
+     gflags \
      libpng \
      jasper \
+     ilmbase \
      openexr \
      webp \
-     openjpeg \
+     jpeg \
      tiff \
      tbb \
      libdc1394 \
      eigen3-devel \
-     boost
+     boost \
+     bzip2 \
+     zlib \
+     ffmpeg \
+     freeglut \
+     mesa \
+     gstreamer1-gst-plugins-base \
+     qt5-qtbase \
+     gtk2 \
+     ade
 
 # OpenMP
 sudo port select clang mp-clang-5.0
