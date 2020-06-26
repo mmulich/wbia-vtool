@@ -9,6 +9,7 @@ sudo port install \
      clang_select \
      eigen3-devel \
      freetype \
+     gflags \
      gdal \
      hdf5 \
      harfbuzz \
