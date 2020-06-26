@@ -7,28 +7,19 @@ set -ex
 sudo port install \
      clang-5.0 \
      clang_select \
-     eigen3-devel \
-     freetype \
-     gflags \
-     gdal \
-     hdf5 \
-     harfbuzz \
-     lapack \
-     zlib \
-     openjpeg \
-     openexr \
-     webp \
-     tiff \
-     libgeotiff \
-     libpng \
-     leptonica \
-     libomp \
      llvm-5.0 \
      llvm_select \
-     OpenBLAS-devel \
-     py36-h5py \
-     py36-gdal \
-     tesseract
+     libomp \
+     libpng \
+     jasper \
+     openexr \
+     webp \
+     libjpeg-turbo \
+     tiff \
+     tbb \
+     libdc1394 \
+     eigen3-devel \
+     boost
 
 # OpenMP
 sudo port select clang mp-clang-5.0

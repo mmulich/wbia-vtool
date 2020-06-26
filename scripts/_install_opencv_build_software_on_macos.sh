@@ -27,13 +27,10 @@ if [ ! -d /opt/opencv ]; then
     mkdir -p $WORKSPACE/opencv/build
     cd $WORKSPACE/opencv/build
     cmake \
+        -D CMAKE_C_COMPILER=clang \
+        -D CMAKE_CXX_COMPILER=clang \
         -D CMAKE_BUILD_TYPE=RELEASE \
         -D CMAKE_INSTALL_PREFIX=/opt/opencv/ \
-        -D OPENCV_EXTRA_MODULES_PATH=$WORKSPACE/opencv_contrib/modules \
-        -D PYTHON3_LIBRARY=`python -c 'import subprocess ; import sys ; s = subprocess.check_output("python-config --configdir", shell=True).decode("utf-8").strip() ; (M, m) = sys.version_info[:2] ; print("{}/libpython{}.{}.dylib".format(s, M, m))'` \
-        -D PYTHON3_INCLUDE_DIR=`python -c 'import distutils.sysconfig as s; print(s.get_python_inc())'` \
-        -D PYTHON3_EXECUTABLE=`which python3.6` \
-        -D BUILD_opencv_python2=OFF \
         -D OPENCV_GENERATE_PKGCONFIG=ON \
         -D ENABLE_PRECOMPILED_HEADERS=OFF \
         -D BUILD_opencv_apps=OFF \
@@ -43,12 +40,14 @@ if [ ! -d /opt/opencv ]; then
         -D BUILD_DOCS=OFF \
         -D BUILD_EXAMPLES=OFF \
         -D BUILD_opencv_java=OFF \
+        -D BUILD_opencv_python2=OFF \
         -D BUILD_opencv_python3=ON \
         -D BUILD_NEW_PYTHON_SUPPORT=ON \
         -D INSTALL_C_EXAMPLES=OFF \
         -D INSTALL_PYTHON_EXAMPLES=OFF \
         -D INSTALL_CREATE_DISTRIB=ON \
         -D BUILD_JPEG=ON \
+        -D BUILD_TIFF=ON \
         -D BUILD_HDR=ON \
         -D WITH_MATLAB=OFF \
         -D WITH_TBB=ON \
@@ -57,24 +56,24 @@ if [ ! -d /opt/opencv ]; then
         -D WITH_EIGEN=ON \
         -D WITH_AVFOUNDATION=ON \
         -D WITH_JPEG=ON \
-        -D BUILD_TIFF=ON \
         -D WITH_HDR=ON \
         -D WITH_V4L=ON \
         -D WITH_GDAL=ON \
         -D WITH_WIN32UI=OFF \
         -D WITH_QT=OFF \
-        -D ENABLE_FAST_MATH=1 \
-        -D CUDA_FAST_MATH=1 \
-        -D OPENCV_ENABLE_NONFREE=ON \
-        -D OPENCV_EXTRA_MODULES_PATH=$WORKSPACE/opencv_contrib/modules \
+        -D PYTHON_LIBRARY=`python -c 'import subprocess ; import sys ; s = subprocess.check_output("python-config --configdir", shell=True).decode("utf-8").strip() ; (M, m) = sys.version_info[:2] ; print("{}/libpython{}.{}.dylib".format(s, M, m))'` \
+        -D PYTHON_INCLUDE_DIR=`python -c 'import distutils.sysconfig as s; print(s.get_python_inc())'` \
+        -D PYTHON_EXECUTABLE=`which python3.6` \
         -D CMAKE_C_FLAGS="${CMAKE_C_FLAGS} -I/opt/local/include -stdlib=libc++" \
         -D CMAKE_CXX_FLAGS="${CMAKE_CXX_FLAGS} -I/opt/local/include -stdlib=libc++" \
         -D CMAKE_SHARED_LINKER_FLAGS="${CMAKE_SHARED_LINKER_FLAGS} -L/opt/local/lib -lc++" \
         -D CMAKE_EXE_LINKER_FLAGS="${CMAKE_EXE_LINKER_FLAGS} -L/opt/local/lib -lc++" \
-         ..
+        -D ENABLE_FAST_MATH=1 \
+        -D CUDA_FAST_MATH=1 \
+        -D OPENCV_ENABLE_NONFREE=ON \
+        -D OPENCV_EXTRA_MODULES_PATH=$WORKSPACE/opencv_contrib/modules \
+        ..
     make -j9
-
-    # Install OpenCV
     sudo make install
     sudo update_dyld_shared_cache
 fi
