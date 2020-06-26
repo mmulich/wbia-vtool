@@ -14,7 +14,7 @@ sudo port install \
      jasper \
      openexr \
      webp \
-     libjpeg-turbo \
+     openjpeg \
      tiff \
      tbb \
      libdc1394 \
