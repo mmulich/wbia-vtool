@@ -24,7 +24,7 @@ endif()
 
 set_property(TARGET sver_s PROPERTY COMPILE_DEFINITIONS SVER_STATIC)
 
-add_library(sver SHARED "${CMAKE_CURRENT_SOURCE_DIR}/sver/sver.h")
+add_library(sver STATIC "${CMAKE_CURRENT_SOURCE_DIR}/sver/sver.h")
 
 if(OS_IS_LINUX)
   set_target_properties(sver PROPERTIES LINKER_LANGUAGE CXX)
